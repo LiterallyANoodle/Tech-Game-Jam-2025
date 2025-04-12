@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0b5ysnfwx4sm"]
+[gd_scene load_steps=6 format=3 uid="uid://b0b5ysnfwx4sm"]
 
 [ext_resource type="PackedScene" uid="uid://cywunhi86p7ta" path="res://addons/tank controls/character.tscn" id="1_u52ul"]
+[ext_resource type="PackedScene" uid="uid://6pluqxlrpmng" path="res://interface.tscn" id="2_vonw3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u52ul"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -25,6 +26,8 @@ shadow_enabled = true
 environment = SubResource("Environment_oi3di")
 
 [node name="Character" parent="." instance=ExtResource("1_u52ul")]
+
+[node name="Interface" parent="Character" instance=ExtResource("2_vonw3")]
 
 [node name="Floor" type="Node3D" parent="."]
 

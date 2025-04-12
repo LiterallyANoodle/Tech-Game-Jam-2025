@@ -12,8 +12,9 @@ var time_since_query: float = 0.0
 func _physics_process(delta: float) -> void:
 	time_since_query += delta
 	if time_since_query >= query_rate:
-		var query = PhysicsRayQueryParameters3D.create(position, \
-			Vector3.FORWARD.rotated(Vector3.UP, raycast_rotation) * 100.0)
+		var query = PhysicsRayQueryParameters3D.create(global_position, \
+			Vector3.FORWARD.rotated(Vector3.UP, raycast_rotation) * 100.0,
+			2)
 		var space_state = get_world_3d().direct_space_state
 		var result = space_state.intersect_ray(query)
 		if result.has("position"):

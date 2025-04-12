@@ -15,4 +15,4 @@ signal MECH_RIGHT_ROTATE_SIGNAL_ON
 signal MECH_RIGHT_ROTATE_SIGNAL_OFF
 
 # sonar
-signal SONAR_WALL_PINGED(relative_position: Vector3)
+signal SONAR_WALL_PINGED(position: Vector3)

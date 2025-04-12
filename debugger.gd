@@ -26,3 +26,7 @@ func _input(event: InputEvent) -> void:
 		SignalBus.emit_signal("MECH_RIGHT_ROTATE_SIGNAL_ON")
 	if event.is_action_released("e"):
 		SignalBus.emit_signal("MECH_RIGHT_ROTATE_SIGNAL_OFF")
+		
+	# menuing 
+	if event.is_action_pressed("esc"):
+		get_tree().quit(0)

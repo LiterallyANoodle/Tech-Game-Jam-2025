@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0b5ysnfwx4sm"]
+
+[ext_resource type="PackedScene" uid="uid://cywunhi86p7ta" path="res://addons/tank controls/character.tscn" id="1_u52ul"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u52ul"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_vonw3"]
+sky_material = SubResource("ProceduralSkyMaterial_u52ul")
+
+[sub_resource type="Environment" id="Environment_oi3di"]
+background_mode = 2
+sky = SubResource("Sky_vonw3")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_oi3di")
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+use_collision = true
+size = Vector3(10, 0.1, 10)
+
+[node name="Character" parent="." instance=ExtResource("1_u52ul")]

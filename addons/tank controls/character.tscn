@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cywunhi86p7ta"]
+
+[ext_resource type="Script" uid="uid://c3it3xonmacuc" path="res://addons/tank controls/character.gd" id="1_ymn0g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h51y8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cvrl2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h0vov"]
+size = Vector3(1.66, 1.66, 2)
+
+[node name="Character" type="CharacterBody3D"]
+script = ExtResource("1_ymn0g")
+
+[node name="Body" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_h51y8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
+mesh = SubResource("CapsuleMesh_cvrl2")
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+fov = 90.0
+
+[node name="Arm" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03397, -1.37663)
+shape = SubResource("BoxShape3D_h0vov")

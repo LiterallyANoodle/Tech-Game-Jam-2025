@@ -27,3 +27,4 @@ fov = 90.0
 [node name="Arm" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03397, -1.37663)
 shape = SubResource("BoxShape3D_h0vov")
+disabled = true

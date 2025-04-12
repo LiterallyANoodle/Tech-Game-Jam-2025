@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://2n2ncva7an41"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d41eu"]
+albedo_color = Color(0.054902, 0.0313726, 0.168627, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d41eu"]
+material = SubResource("StandardMaterial3D_d41eu")
+size = Vector2(1920, 1080)
+center_offset = Vector3(960, 540, 0)
+orientation = 2
+
+[sub_resource type="Gradient" id="Gradient_jngg8"]
+colors = PackedColorArray(0.054902, 0.0313726, 0.168627, 1, 0.054902, 0.0313726, 0.168627, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ag13g"]
+gradient = SubResource("Gradient_jngg8")
+
+[node name="Sonar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(1920, 1080)
+
+[node name="Background" type="MeshInstance2D" parent="SubViewportContainer/SubViewport"]
+mesh = SubResource("PlaneMesh_d41eu")
+texture = SubResource("GradientTexture1D_ag13g")
+
+[node name="Polygon2D" type="Polygon2D" parent="SubViewportContainer/SubViewport"]
+offset = Vector2(960, 540)
+polygon = PackedVector2Array(0.841309, -32.0302, 28.6499, 32.8564, 0.841309, 14.3174, -22.3325, 32.8564)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cywunhi86p7ta"]
+[gd_scene load_steps=6 format=3 uid="uid://cywunhi86p7ta"]
 
 [ext_resource type="Script" uid="uid://c3it3xonmacuc" path="res://addons/tank controls/character.gd" id="1_ymn0g"]
+[ext_resource type="Script" uid="uid://dg26vn07vt0j1" path="res://addons/tank controls/sonar_origin.gd" id="2_f3suw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h51y8"]
 
@@ -28,3 +29,6 @@ fov = 90.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03397, -1.37663)
 shape = SubResource("BoxShape3D_h0vov")
 disabled = true
+
+[node name="Sonar Origin" type="Node3D" parent="."]
+script = ExtResource("2_f3suw")

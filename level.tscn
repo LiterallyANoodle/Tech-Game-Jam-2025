@@ -20,9 +20,70 @@ glow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_oi3di")
 
-[node name="Floor" type="CSGBox3D" parent="."]
+[node name="Character" parent="." instance=ExtResource("1_u52ul")]
+
+[node name="Floor" type="Node3D" parent="."]
+
+[node name="Office" type="CSGBox3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 use_collision = true
 size = Vector3(10, 0.1, 10)
 
-[node name="Character" parent="." instance=ExtResource("1_u52ul")]
+[node name="Cross Hall" type="CSGCombiner3D" parent="Floor"]
+use_collision = true
+
+[node name="Vertical" type="CSGBox3D" parent="Floor/Cross Hall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, -22.5)
+use_collision = true
+size = Vector3(5, 0.1, 35)
+
+[node name="Horizontal" type="CSGBox3D" parent="Floor/Cross Hall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, -15)
+use_collision = true
+size = Vector3(20, 0.1, 5)
+
+[node name="Animals" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -0.05, -6)
+use_collision = true
+size = Vector3(16, 0.1, 24)
+
+[node name="Servers" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5, -0.05, -17)
+use_collision = true
+size = Vector3(19, 0.1, 14)
+
+[node name="Reception" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, -0.05, -52)
+use_collision = true
+size = Vector3(37, 0.1, 24)
+
+[node name="Flooded" type="CSGCombiner3D" parent="Floor"]
+use_collision = true
+
+[node name="Hall" type="CSGBox3D" parent="Floor/Flooded"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, -0.05, -52)
+use_collision = true
+size = Vector3(8, 0.1, 5)
+
+[node name="Room" type="CSGBox3D" parent="Floor/Flooded"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, -0.05, -52)
+use_collision = true
+size = Vector3(16, 0.1, 17)
+
+[node name="Elbow Hall" type="CSGCombiner3D" parent="Floor"]
+use_collision = true
+
+[node name="Vertical" type="CSGBox3D" parent="Floor/Elbow Hall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, -0.05, -48)
+use_collision = true
+size = Vector3(5, 0.1, 48)
+
+[node name="Horizontal" type="CSGBox3D" parent="Floor/Elbow Hall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, -0.05, -57)
+use_collision = true
+size = Vector3(13, 0.1, 5)
+
+[node name="Mechanical" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, -0.05, -84.5)
+use_collision = true
+size = Vector3(57, 0.1, 25)

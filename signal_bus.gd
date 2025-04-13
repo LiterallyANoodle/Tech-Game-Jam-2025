@@ -20,3 +20,5 @@ signal SONAR_WALL_PINGED(position: Vector3)
 # plugs
 signal PLUG_PICKED(origin: Plug)
 signal PLUG_DROPPED
+signal PLUG_HOVERED(hovered: Plug)
+signal PLUG_UNHOVERED(unhovered: Plug)

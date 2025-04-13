@@ -11,6 +11,8 @@ var connections: Array = []
 var connections_to_erase: Array = []
 var incoming_power_level: int = 0
 var incoming_video_signals: Array = []
+var wires: Array = []
+var wires_to_erase: Array = []
 
 func _process(delta: float) -> void:
 	
@@ -18,60 +20,30 @@ func _process(delta: float) -> void:
 	for p: Plug in connections_to_erase:
 		connections.erase(p)
 	connections_to_erase = []
-	
-	# outputters do nothing 
-	if signal_type == SignalType.VIDEO_OUT or signal_type == SignalType.POWER_OUT:
-		return
-	# power in just needs at least 1 power
-	if signal_type == SignalType.POWER_IN:
-		if incoming_power_level > 0:
-			# do something
-			pass
-	# video in must be unique
-	if signal_type == SignalType.VIDEO_IN:
-		if incoming_video_signals.size() == 0:
-			# display nothing
-			pass
-		if incoming_video_signals.size() == 1:
-			# display panel
-			pass
-		if incoming_video_signals.size() > 1:
-			# display error 
-			pass 
+	for w: Wire in wires_to_erase:
+		wires.erase(w)
+		w.queue_free()
+	wires_to_erase = []
 
 # when the origin plug is notified which plug its wire has been released on
 func connection_acknowledge(other: Plug) -> void:
 	if other != self and other not in connections:
 		connections.append(other)
+		for w: Wire in wires:
+			if w.held:
+				w.receiver = other
+				w.held = false
 		print(self.name, " ", connections)
 	
 func connection_delete(other: Plug) -> void:
 	# have to delay actual erasure because it will fuck with the control flow
 	connections_to_erase.append(other)
+	for w: Wire in wires:
+		if w.receiver == other and w.origin == self:
+			wires_to_erase.append(w)
+			
+func _on_area_2d_mouse_entered() -> void:
+	SignalBus.emit_signal("PLUG_HOVERED", self)
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton:
-		
-		if event.is_pressed() and event.button_mask == MOUSE_BUTTON_LEFT:
-			print("LEFT CLICK")
-			Input.set_default_cursor_shape(Input.CURSOR_DRAG)
-			SignalBus.emit_signal("PLUG_PICKED", self)
-		
-		if event.is_pressed() and event.button_mask == MOUSE_BUTTON_RIGHT:
-			print("RIGHT CLICK")
-			for p: Plug in connections:
-				p.connection_delete(self)
-				self.connection_delete(p) 
-			print(self.name, " ", connections)
-			
-		if event.is_released():
-			print("UNCLICK")
-			# cursor change is handled by Game so dropped wires don't make the icon stuck
-			# no self-connections or double-connections allowed
-			# only single connections with other plugs, as God intended
-			if Hand.held_plug != self and Hand.held_plug not in connections:
-				connections.append(Hand.held_plug)
-				Hand.held_plug.connection_acknowledge(self)
-				print(self.name, " ", connections)
-			SignalBus.emit_signal("PLUG_DROPPED") # Do this last
-			
+func _on_area_2d_mouse_exited() -> void:
+	SignalBus.emit_signal("PLUG_UNHOVERED", self)

@@ -351,6 +351,8 @@ position = Vector2(679.62, 337.765)
 [node name="Label" parent="Plugs/S" index="1"]
 text = ""
 
+[node name="Wires" type="Node2D" parent="."]
+
 [editable path="Sonar"]
 [editable path="Plugs/Video In"]
 [editable path="Plugs/Ocular"]

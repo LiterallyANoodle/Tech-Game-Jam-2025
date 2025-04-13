@@ -11,3 +11,7 @@ func _on_plug_picked(origin: Plug) -> void:
 	
 func _on_plug_dropped() -> void:
 	held_plug = null
+
+# man idk why it errors without this...
+func get_held_plug() -> Plug:
+	return held_plug

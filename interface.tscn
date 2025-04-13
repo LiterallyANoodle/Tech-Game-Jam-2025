@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://6pluqxlrpmng"]
+[gd_scene load_steps=8 format=3 uid="uid://6pluqxlrpmng"]
 
 [ext_resource type="Texture2D" uid="uid://dj435svr1jaq8" path="res://interface.png" id="1_rh14k"]
 [ext_resource type="Texture2D" uid="uid://cpl0x5o7t2n83" path="res://light beams.png" id="2_kyn48"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://nigqrteiglvr" path="res://engine off.png" id="4_4rbkc"]
 [ext_resource type="Texture2D" uid="uid://com65fsfm5855" path="res://glass.png" id="5_pt1ru"]
 [ext_resource type="PackedScene" uid="uid://2n2ncva7an41" path="res://sonar.tscn" id="6_0noqu"]
+[ext_resource type="PackedScene" uid="uid://bm2ho00s8i0ww" path="res://plug.tscn" id="7_pxv5b"]
 
 [node name="Interface" type="Sprite2D"]
 scale = Vector2(2, 2)
@@ -38,7 +39,7 @@ offset_bottom = 309.0
 scale = Vector2(0.5, 0.5)
 
 [node name="Polygon2D" parent="Sonar/SubViewportContainer/SubViewport" index="1"]
-offset = Vector2(270, 400)
+offset = Vector2(280, 400)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -203,7 +204,8 @@ offset_left = 633.0
 offset_top = 28.0
 offset_right = 729.0
 offset_bottom = 48.0
-text = "AMBULATION"
+text = "AMBULATION
+(Power IN)"
 
 [node name="Drop Box" type="Label" parent="Control"]
 layout_mode = 0
@@ -213,4 +215,160 @@ offset_right = 917.5
 offset_bottom = 254.0
 text = "DROP BOX"
 
+[node name="Power Outputs" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 617.0
+offset_top = 441.0
+offset_right = 702.0
+offset_bottom = 421.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "POWER OUTPUTS"
+uppercase = true
+
+[node name="Plugs" type="Node2D" parent="."]
+
+[node name="Video In" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(115.5, 450)
+
+[node name="Label" parent="Plugs/Video In" index="1"]
+text = ""
+
+[node name="Ocular" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(354, 64.5)
+
+[node name="Label" parent="Plugs/Ocular" index="1"]
+text = "Video OUT"
+
+[node name="Sonar Video" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(354, 143.7)
+
+[node name="Label" parent="Plugs/Sonar Video" index="1"]
+text = "Video OUT"
+
+[node name="Sonar Power" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(354, 165.945)
+
+[node name="Label" parent="Plugs/Sonar Power" index="1"]
+text = "Power IN"
+
+[node name="Information" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(354, 249.895)
+
+[node name="Label" parent="Plugs/Information" index="1"]
+text = "Video OUT"
+
+[node name="Proximity" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(354, 342.115)
+
+[node name="Label" parent="Plugs/Proximity" index="1"]
+text = "Video OUT"
+
+[node name="Status" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(354, 435.31)
+
+[node name="Label" parent="Plugs/Status" index="1"]
+text = "Video OUT"
+
+[node name="Forward" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(582.15, 83.8)
+
+[node name="Label" parent="Plugs/Forward" index="1"]
+text = "FORWARD WALK"
+
+[node name="Backward" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(582.15, 99.515)
+
+[node name="Label" parent="Plugs/Backward" index="1"]
+text = "BACKWARD WALK"
+
+[node name="L Rotate" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(582.15, 114.92)
+
+[node name="Label" parent="Plugs/L Rotate" index="1"]
+text = "L ROTATE"
+
+[node name="R Rotate" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(582.15, 130.03)
+
+[node name="Label" parent="Plugs/R Rotate" index="1"]
+text = "R ROTATE"
+
+[node name="L Walk" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(582.15, 143.415)
+
+[node name="Label" parent="Plugs/L Walk" index="1"]
+text = "L WALK"
+
+[node name="R Walk" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(582.15, 157.045)
+
+[node name="Label" parent="Plugs/R Walk" index="1"]
+text = "R WALK"
+
+[node name="L Arm" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(703.15, 83.8)
+
+[node name="Label" parent="Plugs/L Arm" index="1"]
+text = "USE L ARM"
+
+[node name="R Arm" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(703.15, 100.265)
+
+[node name="Label" parent="Plugs/R Arm" index="1"]
+text = "USE R ARM"
+
+[node name="Space" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(720.135, 416.195)
+
+[node name="Label" parent="Plugs/Space" index="1"]
+text = ""
+
+[node name="W" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(679.62, 293.035)
+
+[node name="Label" parent="Plugs/W" index="1"]
+text = ""
+
+[node name="A" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(648.96, 314.845)
+
+[node name="Label" parent="Plugs/A" index="1"]
+text = ""
+
+[node name="D" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(710.675, 314.845)
+
+[node name="Label" parent="Plugs/D" index="1"]
+text = ""
+
+[node name="S" parent="Plugs" instance=ExtResource("7_pxv5b")]
+position = Vector2(679.62, 337.765)
+
+[node name="Label" parent="Plugs/S" index="1"]
+text = ""
+
 [editable path="Sonar"]
+[editable path="Plugs/Video In"]
+[editable path="Plugs/Ocular"]
+[editable path="Plugs/Sonar Video"]
+[editable path="Plugs/Sonar Power"]
+[editable path="Plugs/Information"]
+[editable path="Plugs/Proximity"]
+[editable path="Plugs/Status"]
+[editable path="Plugs/Forward"]
+[editable path="Plugs/Backward"]
+[editable path="Plugs/L Rotate"]
+[editable path="Plugs/R Rotate"]
+[editable path="Plugs/L Walk"]
+[editable path="Plugs/R Walk"]
+[editable path="Plugs/L Arm"]
+[editable path="Plugs/R Arm"]
+[editable path="Plugs/Space"]
+[editable path="Plugs/W"]
+[editable path="Plugs/A"]
+[editable path="Plugs/D"]
+[editable path="Plugs/S"]

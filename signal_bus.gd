@@ -16,3 +16,7 @@ signal MECH_RIGHT_ROTATE_SIGNAL_OFF
 
 # sonar
 signal SONAR_WALL_PINGED(position: Vector3)
+
+# plugs
+signal PLUG_PICKED(origin: Plug)
+signal PLUG_DROPPED

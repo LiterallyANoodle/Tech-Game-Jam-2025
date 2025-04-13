@@ -8,10 +8,16 @@ enum VideoOut {OCULAR, SONAR, INFORMATION, PROXIMITY, STATUS}
 @export var label_text: String = ""
 
 var connections: Array = []
+var connections_to_erase: Array = []
 var incoming_power_level: int = 0
 var incoming_video_signals: Array = []
 
 func _process(delta: float) -> void:
+	
+	# destroy deleted connections 
+	for p: Plug in connections_to_erase:
+		connections.erase(p)
+	connections_to_erase = []
 	
 	# outputters do nothing 
 	if signal_type == SignalType.VIDEO_OUT or signal_type == SignalType.POWER_OUT:
@@ -35,12 +41,13 @@ func _process(delta: float) -> void:
 
 # when the origin plug is notified which plug its wire has been released on
 func connection_acknowledge(other: Plug) -> void:
-	if other != self:
+	if other != self and other not in connections:
 		connections.append(other)
 		print(self.name, " ", connections)
 	
 func connection_delete(other: Plug) -> void:
-	connections.erase(other)
+	# have to delay actual erasure because it will fuck with the control flow
+	connections_to_erase.append(other)
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
@@ -53,13 +60,16 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		if event.is_pressed() and event.button_mask == MOUSE_BUTTON_RIGHT:
 			print("RIGHT CLICK")
 			for p: Plug in connections:
-				emit_signal("CONNECTION_DELETE", p)
-				connections.erase(p)
+				p.connection_delete(self)
+				self.connection_delete(p) 
+			print(self.name, " ", connections)
 			
 		if event.is_released():
 			print("UNCLICK")
 			# cursor change is handled by Game so dropped wires don't make the icon stuck
-			if Hand.held_plug != self:
+			# no self-connections or double-connections allowed
+			# only single connections with other plugs, as God intended
+			if Hand.held_plug != self and Hand.held_plug not in connections:
 				connections.append(Hand.held_plug)
 				Hand.held_plug.connection_acknowledge(self)
 				print(self.name, " ", connections)
